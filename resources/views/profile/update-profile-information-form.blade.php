@@ -52,9 +52,9 @@
             </div>
         @endif
 
-        <!-- Name -->
+        <!-- UserName -->
         <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="name" value="{{ __('Name') }}" />
+            <x-jet-label for="name" value="{{ __('ユーザーネーム') }}" />
             <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="state.name" autocomplete="name" />
             <x-jet-input-error for="name" class="mt-2" />
         </div>
@@ -64,6 +64,41 @@
             <x-jet-label for="email" value="{{ __('Email') }}" />
             <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
             <x-jet-input-error for="email" class="mt-2" />
+        </div>
+
+        <!-- Birth_year -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="birth_year" value="{{ __('生年月日') }}" />
+            <x-jet-input id="birth_year" type="date" class="mt-1 block w-full" wire:model.defer="state.birth_year" />
+            <x-jet-input-error for="birth_year" class="mt-2" />
+        </div>
+
+        <!-- Profile -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="profile" value="{{ __('自己紹介・目標') }}" />
+            <textarea name="profile" id="profile" cols="30" rows="5" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1 w-full" required  wire:model.defer="state.profile" ></textarea>
+            <x-jet-input-error for="profile" class="mt-2" />
+        </div>
+
+        <!-- height -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="height" value="{{ __('身長(cm)') }}" />
+            <x-jet-input id="height" type="height" class="mt-1 block w-full" wire:model.defer="state.height" />
+            <x-jet-input-error for="height" class="mt-2" />
+        </div>
+
+        <!-- weight -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="weight" value="{{ __('体重(kg)') }}" />
+            <x-jet-input id="weight" type="weight" class="mt-1 block w-full" wire:model.defer="state.weight" />
+            <x-jet-input-error for="weight" class="mt-2" />
+        </div>
+
+        <!-- terget_weight -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="terget_weight" value="{{ __('目標体重(kg)') }}" />
+            <x-jet-input id="terget_weight" type="terget_weight" class="mt-1 block w-full" wire:model.defer="state.terget_weight" />
+            <x-jet-input-error for="terget_weight" class="mt-2" />
         </div>
     </x-slot>
 
