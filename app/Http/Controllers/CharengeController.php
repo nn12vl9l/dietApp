@@ -24,7 +24,7 @@ class CharengeController extends Controller
      */
     public function create()
     {
-        //
+        return view('charenges.create');
     }
 
     /**

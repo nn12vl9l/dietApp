@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Charenge;
+use App\Models\Entry;
 use App\Models\Post;
 use Illuminate\Http\Request;
+
+use function PHPUnit\Framework\returnSelf;
 
 class PostController extends Controller
 {
@@ -24,7 +28,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $charenges = Charenge::all();
+        $entries = Entry::all();
+        return view('posts.create', compact('charenges','entries'));
     }
 
     /**
@@ -46,7 +52,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('posts.show', compact('posts'));
     }
 
     /**

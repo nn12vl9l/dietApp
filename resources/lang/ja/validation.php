@@ -127,5 +127,14 @@ return [
             'rule-name' => 'custom-message',
         ],
     ],
-    'attributes'           => [],
+    'attributes'           => [
+        'body' => '活動内容',
+        'charenge_id' => 'チャレンジ企画',
+        'created_at' => '投稿日',
+    ],
+        'values' => [
+        'due_date' => [
+            'yesterday' => '昨日',
+        ]
+    ]
 ];

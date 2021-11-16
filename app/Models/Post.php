@@ -12,7 +12,8 @@ class Post extends Model
     protected $fillable = [
         'body',
         'charenge_id',
-        'user_id',
+        'created_at',
+        // 'user_id',
     ];
 
     public function user()
@@ -28,5 +29,10 @@ class Post extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function entries()
+    {
+        return $this->hasMany(Entry::class);
     }
 }

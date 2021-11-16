@@ -17,7 +17,7 @@ class PostSeeder extends Seeder
         DB::table('posts')->insert([
             [
                 'user_id' => 1,
-                'charenge_id' => 1,
+                'entry_id' => 1,
                 'image' => '',
                 'likes_count' => 0,
                 'body' => 'スクワット10回×5セット、足上げ腹筋20回×3セット',
@@ -27,7 +27,7 @@ class PostSeeder extends Seeder
             ],
             [
                 'user_id' => 2,
-                'charenge_id' => 1,
+                'entry_id' => 1,
                 'image' => '',
                 'likes_count' => 0,
                 'body' => '下半身引き締め',

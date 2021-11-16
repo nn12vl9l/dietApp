@@ -23,4 +23,9 @@ class Entry extends Model
     {
         return $this->hasMany(Charenge::class);
     }
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
 }
