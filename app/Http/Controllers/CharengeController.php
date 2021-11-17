@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Charenge;
-use Illuminate\Http\Request;
+use App\Http\Requests\CharengeRequest;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class CharengeController extends Controller
 {
@@ -30,12 +32,32 @@ class CharengeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\CharengeRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CharengeRequest $request)
     {
-        //
+        $charenge = new Charenge($request->all());
+        $charenge->user_id = $request->user()->id;
+
+        $file = $request->file('image');
+        $charenge->image = date('YmdHis') . '_' . $file->getClientOriginalName();
+
+        DB::beginTransaction();
+        try {
+            $charenge->save();
+            if (!Storage::putFileAs('images/charenges', $file, $charenge->image)) {
+                throw new \Exception('サムネイル画像の保存に失敗しました。');
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back()->withInput()->withErrors('エラーにより公開できませんでした。');
+        }
+
+        return redirect()
+            ->route('charenges.show', $charenge)
+            ->with('notice', 'チャレンジ企画を公開しました');
     }
 
     /**
@@ -46,7 +68,7 @@ class CharengeController extends Controller
      */
     public function show(Charenge $charenge)
     {
-        //
+        return view('charenges.show', compact('charenge'));
     }
 
     /**
@@ -57,19 +79,54 @@ class CharengeController extends Controller
      */
     public function edit(Charenge $charenge)
     {
-        //
+        return view('charenges.edit', compact('charenge'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\CharengeRequest  $request
      * @param  \App\Models\Charenge  $charenge
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Charenge $charenge)
+    public function update(CharengeRequest $request, Charenge $charenge)
     {
-        //
+        if ($request->user()->cannot('update', $charenge)) {
+            return redirect()->route('charenges.show', $charenge)
+                ->withErrors('自分の投稿以外は更新できません');
+        }
+
+        // $charenge = new Charenge($request->all());
+        // $charenge->user_id = $request->user()->id;
+
+        $file = $request->file('image');
+        if ($file) {
+            $delete_file_path = $charenge->image_url;
+            $charenge->image = date('YmdHis') . '_' . $file->getClientOriginalName();
+        }
+        $charenge->fill($request->all());
+
+        DB::beginTransaction();
+        try {
+            $charenge->save();
+            if ($file) {
+                if (!Storage::putFileAs('images/charenges', $file, $charenge->image)) {
+                    throw new \Exception('サムネイル画像の保存に失敗しました。');
+                }
+                if (!Storage::delete($delete_file_path)) {
+                    throw new \Exception('サムネイル画像の削除に失敗しました。');
+                }
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            {{ dd($e); }}
+            DB::rollback();
+            return back()->withInput()->withErrors('エラーにより更新できませんでした。');
+        }
+
+        return redirect()
+            ->route('charenges.show', $charenge)
+            ->with('notice', 'チャレンジ企画を更新しました');
     }
 
     /**

@@ -53,7 +53,7 @@ class CharengePolicy
      */
     public function update(User $user, Charenge $charenge)
     {
-        //
+        return $user->id === $charenge->user_id;
     }
 
     /**
@@ -65,7 +65,7 @@ class CharengePolicy
      */
     public function delete(User $user, Charenge $charenge)
     {
-        //
+        return $user->id === $charenge->user_id;
     }
 
     /**

@@ -25,7 +25,7 @@ class PostRequest extends FormRequest
     {
         return [
             'body' => 'required|text|max:2000',
-            'charenge_id' => 'required|exists:charenges,id',
+            'entry_id' => 'required|exists:entries,id',
             'created_at' => 'required|after:yesterday',
         ];
     }

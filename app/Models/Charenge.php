@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class Charenge extends Model
 {
@@ -12,7 +14,8 @@ class Charenge extends Model
     protected $fillable = [
         'title',
         'body',
-        'user_id',
+        'limit_data',
+        'image',
     ];
 
     public function user()
@@ -28,5 +31,25 @@ class Charenge extends Model
     public function entries()
     {
         return $this->hasMany(Entry::class);
+    }
+
+    public function getImagePathAttribute()
+    {
+        return 'public/images/charenges/' . $this->image;
+    }
+
+    public function getImageUrlAttribute()
+    {
+        return Storage::url($this->image_path);
+    }
+
+    public function getDateDiffAttribute()
+    {
+        return Carbon::parse($this->created_at)->diffForHumans(now());
+    }
+
+    public function getLimitDataDiffAttribute()
+    {
+        return Carbon::parse($this->limit_data)->diffInDays($this->created_at);
     }
 }

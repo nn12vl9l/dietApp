@@ -129,8 +129,11 @@ return [
     ],
     'attributes'           => [
         'body' => '活動内容',
-        'charenge_id' => 'チャレンジ企画',
+        'entry_id' => 'チャレンジ企画',
         'created_at' => '投稿日',
+        'title' => 'タイトル',
+        'limit_data' => 'チャレンジ期間',
+        'image' => '画像',
     ],
         'values' => [
         'due_date' => [

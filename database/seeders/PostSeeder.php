@@ -25,16 +25,16 @@ class PostSeeder extends Seeder
                 'intake_kcal' => 1400,
                 'consume_kcal' => 1300,
             ],
-            [
-                'user_id' => 2,
-                'entry_id' => 1,
-                'image' => '',
-                'likes_count' => 0,
-                'body' => '下半身引き締め',
-                'weight_kg' => 66,
-                'intake_kcal' => 1800,
-                'consume_kcal' => 1000,
-            ]
+            // [
+            //     'user_id' => 2,
+            //     'entry_id' => 1,
+            //     'image' => '',
+            //     'likes_count' => 0,
+            //     'body' => '下半身引き締め',
+            //     'weight_kg' => 66,
+            //     'intake_kcal' => 1800,
+            //     'consume_kcal' => 1000,
+            // ]
         ]);
     }
 }

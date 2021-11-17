@@ -17,7 +17,7 @@ class CreateCharengesTable extends Migration
             $table->id();
             $table->text('title');
             $table->text('body');
-            $table->text('image')->nullable();
+            $table->text('image');
             $table->foreignId('user_id')
                 ->constrained()
                 ->cascadeOnUpdate()

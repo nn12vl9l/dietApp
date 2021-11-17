@@ -5,6 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
+        {{-- <i class="fas fa-map-pin"></i> --}}
+
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
