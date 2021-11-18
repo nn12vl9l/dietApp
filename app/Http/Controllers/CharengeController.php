@@ -16,7 +16,8 @@ class CharengeController extends Controller
      */
     public function index()
     {
-        //
+        $charenges = Charenge::all();
+        return view('charenges.index', compact('charenges'));
     }
 
     /**
@@ -91,17 +92,17 @@ class CharengeController extends Controller
      */
     public function update(CharengeRequest $request, Charenge $charenge)
     {
-        if ($request->user()->cannot('update', $charenge)) {
-            return redirect()->route('charenges.show', $charenge)
-                ->withErrors('自分の投稿以外は更新できません');
-        }
+        // if ($request->user()->cannot('update', $charenge)) {
+        //     return redirect()->route('charenges.show', $charenge)
+        //         ->withErrors('自分の投稿以外は更新できません');
+        // }
 
         // $charenge = new Charenge($request->all());
         // $charenge->user_id = $request->user()->id;
 
         $file = $request->file('image');
         if ($file) {
-            $delete_file_path = $charenge->image_url;
+            $delete_file_path = $charenge->image_path;
             $charenge->image = date('YmdHis') . '_' . $file->getClientOriginalName();
         }
         $charenge->fill($request->all());
@@ -119,7 +120,7 @@ class CharengeController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
-            {{ dd($e); }}
+            dd($e, $delete_file_path);
             DB::rollback();
             return back()->withInput()->withErrors('エラーにより更新できませんでした。');
         }

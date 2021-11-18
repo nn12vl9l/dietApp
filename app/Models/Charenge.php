@@ -35,7 +35,7 @@ class Charenge extends Model
 
     public function getImagePathAttribute()
     {
-        return 'public/images/charenges/' . $this->image;
+        return 'images/charenges/' . $this->image;
     }
 
     public function getImageUrlAttribute()

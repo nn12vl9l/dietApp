@@ -22,7 +22,7 @@ class CreateCharengesTable extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->datetime('limit_data');
+            $table->date('limit_data');
             $table->timestamps();
         });
     }
