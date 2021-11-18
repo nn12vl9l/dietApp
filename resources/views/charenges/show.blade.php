@@ -7,7 +7,9 @@
             <div class="flex justify-between text-sm">
                 <div class="flex item-center">
                     <div class="border border-gray-900 px-2 h-7 leading-7 rounded-full">
+                        {{-- <a href="{{ route('profile.show', $charenge->user) }}"> --}}
                         {{ $charenge->user->name }}さんのチャレンジ企画</div>
+                    {{-- </a> --}}
                 </div>
             </div>
             <p class="text-sm mb-2 md:text-base font-normal text-gray-600 text-right">
@@ -55,5 +57,30 @@
                 </form>
             @endcan
         </div>
+        <div>
+            @foreach ($posts as $post)
+                <hr class="my-4">
+                <div class="flex">
+                <img src="{{ $post->user->profile_photo_url }}" class="rounded-full mr-4">
+                <div>
+                    <p>{{ $post->user->name }}</p>
+                    <p class="text-sm">体重:{{ $post->user->weight }}kg</p>
+                    <p class="text-sm">目標体重:{{ $post->user->terget_weight }}kg</p>
+                </div>
+            </div>
+                <p>{{ $post->created_at->format('Y/m/d') }}</p>
+                <img src="{{ $post->image_url }}" class="container mx-auto mb-4 md:w-1/2 sm:auto">
+                <p class="text-center">{{ $post->body }}</p>
+            @endforeach
+        </div>
+
+
+        {{-- <form action="{{ route('charenges.messages.store', $charenge) }}" method="post" class="flex">
+            @csrf
+            <input type="text" placeholder="コメントを入力する" name="message" value="{{ old('message') }}"
+                class="w-full rounded-full mr-3">
+            <input type="submit" value="送信"
+                class=" justify-center bg-gradient-to-r from-pink-500 to-purple-600 hover:bg-gradient-to-l hover:from-purple-500 hover:to-pink-600 text-gray-100 p-2 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500 sm:w-32">
+        </form> --}}
     </div>
 </x-app-layout>

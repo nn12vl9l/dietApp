@@ -6,6 +6,7 @@ use App\Models\Charenge;
 use App\Http\Requests\CharengeRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Post;
 
 class CharengeController extends Controller
 {
@@ -69,7 +70,8 @@ class CharengeController extends Controller
      */
     public function show(Charenge $charenge)
     {
-        return view('charenges.show', compact('charenge'));
+        $posts = Post::all();
+        return view('charenges.show', compact('charenge','posts'));
     }
 
     /**
@@ -96,9 +98,6 @@ class CharengeController extends Controller
         //     return redirect()->route('charenges.show', $charenge)
         //         ->withErrors('自分の投稿以外は更新できません');
         // }
-
-        // $charenge = new Charenge($request->all());
-        // $charenge->user_id = $request->user()->id;
 
         $file = $request->file('image');
         if ($file) {
@@ -138,6 +137,19 @@ class CharengeController extends Controller
      */
     public function destroy(Charenge $charenge)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $charenge->delete();
+            if (!Storage::delete($charenge->image_path)) {
+                throw new \Exception('サムネイル画像の削除に失敗しました。');
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back()->withInput()->withErrors('エラーにより削除できませんでした。');
+        }
+        return redirect()
+            ->route('charenges.index', $charenge)
+            ->with('notice', 'チャレンジ企画を削除しました');
     }
 }

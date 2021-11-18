@@ -25,6 +25,10 @@ class CreatePostsTable extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table->foreignId('charenge_id')
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->integer('likes_count');
             $table->integer('weight_kg')->nullable();
             $table->integer('intake_kcal')->nullable();

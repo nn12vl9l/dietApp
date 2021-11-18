@@ -3,6 +3,7 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CharengeController;
 use App\Http\Controllers\EntryController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,6 +37,10 @@ Route::resource('charenges', CharengeController::class)
 
 Route::resource('charenges.entries', EntryController::class)
     ->only(['store', 'destroy']);
+
+Route::resource('charenges.messages', MessageController::class)
+    ->only(['create', 'store', 'edit', 'update', 'destroy']);
+    // ->middleware('auth');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

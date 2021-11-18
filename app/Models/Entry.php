@@ -19,9 +19,9 @@ class Entry extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function charenges()
+    public function charenge()
     {
-        return $this->hasMany(Charenge::class);
+        return $this->belongsTo(Charenge::class);
     }
 
     public function post()

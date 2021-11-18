@@ -18,6 +18,7 @@ class PostSeeder extends Seeder
             [
                 'user_id' => 1,
                 'entry_id' => 1,
+                'charenge_id' => 1,
                 'image' => '20211118103709_23.jpg',
                 'likes_count' => 0,
                 'body' => 'スクワット10回×5セット、足上げ腹筋20回×3セット',

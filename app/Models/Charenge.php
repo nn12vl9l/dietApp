@@ -52,4 +52,9 @@ class Charenge extends Model
     {
         return Carbon::parse($this->limit_data)->diffInDays($this->created_at);
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }
