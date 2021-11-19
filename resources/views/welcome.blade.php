@@ -419,7 +419,7 @@
                 <div
                     class="w-4/5 flex flex-auto flex-col md:flex-row items-center justify-center p-10 xl:p-32 overflow-hidden">
                     <div class="w-1/2 z-10">
-                        <div class="text-5xl sm:text-6xl xl:text-8xl font-bold leading-tight mb-6">Shere'ett
+                        <div class="text-5xl sm:text-6xl xl:text-8xl font-bold leading-tight mb-6">Share'ett
                         </div>
                         <div class="sm:text-sm xl:text-md text-black-200 font-normal">
                             dietが続かないのは一人で取り組むから。<br>ここであなたのDietをShereしませんか?</div>

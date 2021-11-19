@@ -3,7 +3,7 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CharengeController;
 use App\Http\Controllers\EntryController;
-use App\Http\Controllers\MessageController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,8 +26,7 @@ Route::resource('posts', PostController::class)
     // ->middleware('auth:users');
 
 Route::resource('posts', PostController::class)
-    ->only(['show', 'index'])
-    ->middleware('auth:users');
+    ->only(['show', 'index']);
 
 Route::resource('charenges', CharengeController::class)
     ->only(['create', 'store', 'edit', 'update', 'destroy']);
@@ -38,9 +37,9 @@ Route::resource('charenges', CharengeController::class)
 Route::resource('charenges.entries', EntryController::class)
     ->only(['store', 'destroy']);
 
-Route::resource('charenges.messages', MessageController::class)
+Route::resource('charenges.comments', CommentController::class)
     ->only(['create', 'store', 'edit', 'update', 'destroy']);
-    // ->middleware('auth');
+// ->middleware('auth');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

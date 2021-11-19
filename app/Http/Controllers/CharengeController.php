@@ -58,7 +58,7 @@ class CharengeController extends Controller
         }
 
         return redirect()
-            ->route('charenges.show', $charenge)
+            ->route('charenges.index', $charenge)
             ->with('notice', 'チャレンジ企画を公開しました');
     }
 

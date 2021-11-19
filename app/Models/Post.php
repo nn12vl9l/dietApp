@@ -14,6 +14,9 @@ class Post extends Model
     protected $fillable = [
         'body',
         'charenge_id',
+        'weight_kg',
+        'intake_kcal',
+        'consume_kcal',
         'created_at',
     ];
 
@@ -40,11 +43,6 @@ class Post extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
-    }
-
-    public function entries()
-    {
-        return $this->hasMany(Entry::class);
     }
 
     public function charenge()

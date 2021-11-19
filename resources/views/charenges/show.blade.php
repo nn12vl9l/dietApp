@@ -59,28 +59,32 @@
         </div>
         <div>
             @foreach ($posts as $post)
+            @if ($post->charenge_id == $charenge->id)
                 <hr class="my-4">
+                <a href="{{ route('posts.show', $post) }}">
                 <div class="flex">
-                <img src="{{ $post->user->profile_photo_url }}" class="rounded-full mr-4">
-                <div>
-                    <p>{{ $post->user->name }}</p>
-                    <p class="text-sm">体重:{{ $post->user->weight }}kg</p>
-                    <p class="text-sm">目標体重:{{ $post->user->terget_weight }}kg</p>
+                    <img src="{{ $post->user->profile_photo_url }}" class="rounded-full mr-4 mt-2 mb-2">
+                    <div>
+                        <p class="text-xl">{{ $post->user->name }}</p>
+                        <p class="text-sm">体重:{{ $post->user->weight }}kg</p>
+                        <p class="text-sm">目標体重:{{ $post->user->terget_weight }}kg</p>
+                    </div>
                 </div>
-            </div>
-                <p>{{ $post->created_at->format('Y/m/d') }}</p>
+                <p>{{ $post->post_day }}</p>
                 <img src="{{ $post->image_url }}" class="container mx-auto mb-4 md:w-1/2 sm:auto">
-                <p class="text-center">{{ $post->body }}</p>
+                <p class="text-center mb-6">{{ $post->body }}</p>
+                </a>
+                {{-- <form action="{{ route('charenges.comments.store', $charenge) }}" method="post"
+                    class="flex">
+                    @csrf
+                    <input type="hidden" name="post" value="{{ $post->id }}">
+                    <input type="text" placeholder="コメントを入力する" name="comment" value="{{ old('comment') }}"
+                        class="container mx-auto md:w-1/2 rounded-full mr-3">
+                    <input type="submit" value="送信"
+                        class=" justify-center bg-gradient-to-r from-pink-500 to-purple-600 hover:bg-gradient-to-l hover:from-purple-500 hover:to-pink-600 text-gray-100 p-2 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500 sm:w-20">
+                </form> --}}
+                @endif
             @endforeach
         </div>
-
-
-        {{-- <form action="{{ route('charenges.messages.store', $charenge) }}" method="post" class="flex">
-            @csrf
-            <input type="text" placeholder="コメントを入力する" name="message" value="{{ old('message') }}"
-                class="w-full rounded-full mr-3">
-            <input type="submit" value="送信"
-                class=" justify-center bg-gradient-to-r from-pink-500 to-purple-600 hover:bg-gradient-to-l hover:from-purple-500 hover:to-pink-600 text-gray-100 p-2 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500 sm:w-32">
-        </form> --}}
     </div>
 </x-app-layout>

@@ -8,23 +8,30 @@
         <form action="{{ route('posts.store') }}" method="POST" class="rounded pt-3 pb-8 mb-4">
             @csrf
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm mb-2" for="entry_id">
-                    チャレンジ選択
-                </label>
-                <select name="entry_id"
-                    class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-pink-600 w-full py-2 px-3">
-                    <option disabled selected value="">選択してください</option>
-                    @foreach ($charenges as $charenge)
-                        <option value="{{ $charenge->id }}" @if ($charenge->id == old('charenge_id')) selected @endif>{{ $charenge->title }}</option>
-                    @endforeach
-                </select>
+
+                        <label class="block text-gray-700 text-sm mb-2" for="charenge_id">
+                            チャレンジ選択
+                        </label>
+                        <select name="charenge_id"
+                            class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-pink-600 w-full py-2 px-3">
+                            <option disabled selected value="">選択してください</option>
+                            @foreach ($entries as $entry)
+                    @if (Auth::id() == $entry->user_id)
+                            <option value="{{ $entry->charenge_id }}" @if ($entry->charenge_id == old('entry->charenge_id')) selected @endif>{{ $entry->charenge->title }}
+                            </option>
+                            {{-- @endforeach --}}
+                            @endif
+                        @endforeach
+                        </select>
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm mb-2" for="body">
                     活動内容
                 </label>
-                <textarea name="body" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-pink-600 w-full py-2 px-3" id="body" cols="30" rows="10"
-                required placeholder="チャレンジ企画の感想、身体の変化や食事や運動について共有しよう！">{{ old('body') }}</textarea>
+                <textarea name="body"
+                    class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-pink-600 w-full py-2 px-3"
+                    id="body" cols="30" rows="10" required
+                    placeholder="チャレンジ企画の感想、身体の変化や食事や運動について共有しよう！">{{ old('body') }}</textarea>
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm mb-2" for="image">
@@ -33,40 +40,40 @@
                 <input type="file" name="image" class="border-gray-300">
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm mb-2" for="weight">
+                <label class="block text-gray-700 text-sm mb-2" for="weight_kg">
                     体重(kg)
                 </label>
-                <input type="number" name="weight"
+                <input type="number" name="weight_kg"
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full py-2 px-3"
-                    placeholder="60" value="{{ old('weight') }}">
+                    placeholder="60" value="{{ old('weight_kg') }}">
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm mb-2" for="intake">
+                <label class="block text-gray-700 text-sm mb-2" for="intake_kcal">
                     摂取カロリー(kcal)
                 </label>
-                <input type="number" name="intake"
+                <input type="number" name="intake_kcal"
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full py-2 px-3"
-                    placeholder="1800" value="{{ old('intake') }}">
+                    placeholder="1800" value="{{ old('intake_kcal') }}">
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm mb-2" for="consume">
+                <label class="block text-gray-700 text-sm mb-2" for="consume_kcal">
                     消費カロリー(kcal)
                 </label>
-                <input type="number" name="consume"
+                <input type="number" name="consume_kcal"
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full py-2 px-3"
-                    placeholder="1200" value="{{ old('consume') }}">
+                    placeholder="1200" value="{{ old('consume_kcal') }}">
             </div>
             <div class="mb-8">
-                <label class="block text-gray-700 text-sm mb-2" for="created_at">
+                <label class="block text-gray-700 text-sm mb-2" for="post_day">
                     投稿日
                 </label>
-                <input type="date" name="created_at"
+                <input type="date" name="post_day"
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full py-2 px-3"
-                    required placeholder="投稿日" value="{{ old('created_at') }}">
+                    required placeholder="投稿日">
             </div>
             <div class="mb-4">
-            <input type="submit" value="投稿する"
-                class="w-full flex justify-center bg-gradient-to-r from-pink-500 to-purple-600 hover:bg-gradient-to-l hover:from-purple-500 hover:to-pink-600 text-gray-100 p-2 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500">
+                <input type="submit" value="投稿する"
+                    class="w-full flex justify-center bg-gradient-to-r from-pink-500 to-purple-600 hover:bg-gradient-to-l hover:from-purple-500 hover:to-pink-600 text-gray-100 p-2 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500">
             </div>
         </form>
     </div>

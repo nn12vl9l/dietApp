@@ -21,18 +21,14 @@ class CreatePostsTable extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->foreignId('entry_id')
-                ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
             $table->foreignId('charenge_id')
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->integer('likes_count');
             $table->integer('weight_kg')->nullable();
             $table->integer('intake_kcal')->nullable();
             $table->integer('consume_kcal')->nullable();
+            $table->date('post_day');
             $table->timestamps();
         });
     }

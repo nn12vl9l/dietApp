@@ -1,9 +1,9 @@
 <x-app-layout>
     <div class="container max-w-7xl mx-auto px-4 md:px-12 pb-3 mt-3">
         <x-flash-message :message="session('notice')" />
-        <div class="flex flex-wrap -mx-1 lg:-mx-4 mb-4">
+        <div class="flex flex-wrap -mx-1 lg:-mx-4 mb-4 mt-4">
             @foreach ($charenges as $charenge)
-                <article class="w-full px-4 md:w-1/2 text-xl text-gray-800 leading-normal">
+                <article class="w-full px-4 md:w-1/2 text-xl text-gray-800 leading-normal mt-8">
                     <a href="{{ route('charenges.show', $charenge) }}">
                         <div class="flex item-center text-sm">
                             <div class="border border-gray-900 px-2 h-7 leading-7 rounded-full">
@@ -18,6 +18,7 @@
                         </p>
                         <img class="container mx-auto mb-4 md:w-4/5 sm:auto" src="{{ $charenge->image_url }}" alt="">
                         <p class="text-gray-700 text-base">{{ $charenge->body }}</p>
+                        <hr class="my-4">
                     </a>
                 </article>
             @endforeach

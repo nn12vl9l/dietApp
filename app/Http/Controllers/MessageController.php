@@ -16,7 +16,5 @@ class MessageController extends Controller
         $message->save();
 
         return view('charenges.show', compact('message', 'charenge'));
-
-        // return redirect()->route('charenges.show', $message);
     }
 }

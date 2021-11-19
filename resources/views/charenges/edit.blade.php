@@ -40,6 +40,7 @@
                 <input type="date" name="limit_data"
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full py-2 px-3"
                     value="{{ $charenge->limit_data }}">
+
             </div>
             <div class="mb-4">
                 <input type="submit" value="チャレンジを更新"

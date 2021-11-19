@@ -6,6 +6,8 @@ use App\Models\Charenge;
 use App\Models\Entry;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 use function PHPUnit\Framework\returnSelf;
 
@@ -41,7 +43,27 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post($request->all());
+        $post->user_id = $request->user()->id;
+
+        $file = $request->file('image');
+        $post->image = date('YmdHis') . '_' . $file->getClientOriginalName();
+
+        DB::beginTransaction();
+        try {
+            $post->save();
+            if (!Storage::putFileAs('images/posts', $file, $post->image)) {
+                throw new \Exception('サムネイル画像の保存に失敗しました。');
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back()->withInput()->withErrors('エラーにより公開できませんでした。');
+        }
+
+        return redirect()
+            ->route('charenges.show', $post)
+            ->with('notice', '投稿しました。');
     }
 
     /**

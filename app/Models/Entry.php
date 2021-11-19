@@ -24,8 +24,4 @@ class Entry extends Model
         return $this->belongsTo(Charenge::class);
     }
 
-    public function post()
-    {
-        return $this->belongsTo(Post::class);
-    }
 }
