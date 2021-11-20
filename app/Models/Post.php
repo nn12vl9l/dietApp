@@ -17,7 +17,8 @@ class Post extends Model
         'weight_kg',
         'intake_kcal',
         'consume_kcal',
-        'created_at',
+        'post_day',
+        'image',
     ];
 
     public function getImagePathAttribute()

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Charenge;
 use App\Http\Requests\CharengeRequest;
+use App\Models\Entry;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Post;
@@ -41,6 +42,14 @@ class CharengeController extends Controller
     {
         $charenge = new Charenge($request->all());
         $charenge->user_id = $request->user()->id;
+        $charenge->save();
+
+        // dd($charenge->id);
+
+        $entry = new Entry();
+        $entry->user_id = $charenge->user_id;
+        $entry->charenge_id = $charenge->id;
+        $entry->save();
 
         $file = $request->file('image');
         $charenge->image = date('YmdHis') . '_' . $file->getClientOriginalName();
@@ -71,7 +80,11 @@ class CharengeController extends Controller
     public function show(Charenge $charenge)
     {
         $posts = Post::all();
-        return view('charenges.show', compact('charenge','posts'));
+        // $entry = Entry::where('user_id', auth()->user()->id)->where('charenge_id', $charenge->id)->get()->first();
+        $entry = $charenge->entries()->where('user_id', auth()->user()->id)->get()->first();
+        // dd(empty($entry));
+
+        return view('charenges.show', compact('charenge','posts','entry'));
     }
 
     /**

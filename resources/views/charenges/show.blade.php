@@ -7,9 +7,7 @@
             <div class="flex justify-between text-sm">
                 <div class="flex item-center">
                     <div class="border border-gray-900 px-2 h-7 leading-7 rounded-full">
-                        {{-- <a href="{{ route('profile.show', $charenge->user) }}"> --}}
                         {{ $charenge->user->name }}さんのチャレンジ企画</div>
-                    {{-- </a> --}}
                 </div>
             </div>
             <p class="text-sm mb-2 md:text-base font-normal text-gray-600 text-right">
@@ -33,7 +31,7 @@
                         @csrf
                         @method('DELETE')
                         <input type="submit" value="参加中" onclick="if(!confirm('参加を取り消しますか？')){return false};"
-                            class="w-full flex justify-center bg-gradient-to-r from-pink-400 to-red-500 hover:bg-gradient-to-l hover:from-pink-600 hover:to-red-400 text-gray-100 p-2 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500">
+                            class="w-full flex justify-center bg-gradient-to-r from-gray-400 to-gray-500 hover:bg-gradient-to-l hover:from-gray-600 hover:to-gray-400 text-gray-100 p-2 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500">
                     </form>
                 @endif
             </div>
@@ -59,31 +57,42 @@
         </div>
         <div>
             @foreach ($posts as $post)
-            @if ($post->charenge_id == $charenge->id)
-                <hr class="my-4">
-                <a href="{{ route('posts.show', $post) }}">
-                <div class="flex">
-                    <img src="{{ $post->user->profile_photo_url }}" class="rounded-full mr-4 mt-2 mb-2">
-                    <div>
-                        <p class="text-xl">{{ $post->user->name }}</p>
-                        <p class="text-sm">体重:{{ $post->user->weight }}kg</p>
-                        <p class="text-sm">目標体重:{{ $post->user->terget_weight }}kg</p>
-                    </div>
-                </div>
-                <p>{{ $post->post_day }}</p>
-                <img src="{{ $post->image_url }}" class="container mx-auto mb-4 md:w-1/2 sm:auto">
-                <p class="text-center mb-6">{{ $post->body }}</p>
-                </a>
-                {{-- <form action="{{ route('charenges.comments.store', $charenge) }}" method="post"
-                    class="flex">
-                    @csrf
-                    <input type="hidden" name="post" value="{{ $post->id }}">
-                    <input type="text" placeholder="コメントを入力する" name="comment" value="{{ old('comment') }}"
-                        class="container mx-auto md:w-1/2 rounded-full mr-3">
-                    <input type="submit" value="送信"
-                        class=" justify-center bg-gradient-to-r from-pink-500 to-purple-600 hover:bg-gradient-to-l hover:from-purple-500 hover:to-pink-600 text-gray-100 p-2 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500 sm:w-20">
-                </form> --}}
+                @if ($post->charenge_id == $charenge->id)
+                    <hr class="my-4">
+                    <a href="{{ route('posts.show', $post) }}">
+                        <div class="flex">
+                            <img src="{{ $post->user->profile_photo_url }}" class="rounded-full mr-4 mt-2 mb-2">
+                            <div>
+                                <p class="text-xl">{{ $post->user->name }}</p>
+                                <p class="text-sm">体重:{{ $post->user->weight }}kg</p>
+                                <p class="text-sm">目標体重:{{ $post->user->terget_weight }}kg</p>
+                            </div>
+                        </div>
+                        <p>{{ $post->post_day }}</p>
+                        <img src="{{ $post->image_url }}" class="container mx-auto mb-4 md:w-1/2 sm:auto">
+                        <p class="text-center mb-6">{{ $post->body }}</p>
+                    </a>
                 @endif
+                <div>
+                    {{-- @if ($like)
+                    <form action="{{ route('posts.likes.destroy', [$post, $like]) }}" method="POST" class="mt-2">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit"
+                            class="bg-pink-400 hover:bg-pink-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-40 mr-2"
+                            value="お気に入り削除">
+                        <p class="text-gray-700 font-bold">お気に入り数:{{ $post->likes->count() }}</p>
+                    </form>
+                @else
+                    <form action="{{ route('posts.likes.store', $post) }}" method="POST" class="mt-2">
+                        @csrf
+                        <input type="submit"
+                            class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-40 mr-2"
+                            value="お気に入り">
+                        <p class="text-gray-700 font-bold">お気に入り数:{{ $post->likes->count() }}</p>
+                    </form>
+                @endif --}}
+                </div>
             @endforeach
         </div>
     </div>

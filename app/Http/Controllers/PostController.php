@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Charenge;
+use App\Models\Comment;
 use App\Models\Entry;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -58,11 +59,12 @@ class PostController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
+            // dd($e);
             return back()->withInput()->withErrors('エラーにより公開できませんでした。');
         }
 
         return redirect()
-            ->route('charenges.show', $post)
+            ->route('charenges.show', $post->charenge)
             ->with('notice', '投稿しました。');
     }
 
@@ -72,9 +74,11 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Post $post ,Charenge $charenge, Comment $comment)
     {
-        return view('posts.show', compact('posts'));
+        $charenges = Charenge::all();
+        $comments = Comment::all();
+        return view('posts.show', compact('charenges', 'post', 'charenge', 'comment', 'comments'));
     }
 
     /**
@@ -85,7 +89,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -97,7 +101,34 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $file = $request->file('image');
+        if ($file) {
+            $delete_file_path = $post->image_path;
+            $post->image = date('YmdHis') . '_' . $file->getClientOriginalName();
+        }
+        $post->fill($request->all());
+
+        DB::beginTransaction();
+        try {
+            $post->save();
+            if ($file) {
+                if (!Storage::putFileAs('images/posts', $file, $post->image)) {
+                    throw new \Exception('画像の保存に失敗しました。');
+                }
+                if (!Storage::delete($delete_file_path)) {
+                    throw new \Exception('画像の削除に失敗しました。');
+                }
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            dd($e, $delete_file_path);
+            DB::rollback();
+            return back()->withInput()->withErrors('エラーにより更新できませんでした。');
+        }
+
+        return redirect()
+            ->route('charenges.show', $post->charenge)
+            ->with('notice', '投稿を更新しました');
     }
 
     /**
@@ -108,6 +139,19 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $post->delete();
+            if (!Storage::delete($post->image_path)) {
+                throw new \Exception('画像の削除に失敗しました。');
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back()->withInput()->withErrors('エラーにより削除できませんでした。');
+        }
+        return redirect()
+            ->route('charenges.show', $post->charenge)
+            ->with('notice', '投稿を削除しました');
     }
 }

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <link rel="stylesheet" href="{{ asset('css/top.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/top.css') }}"> --}}
     <div class="container lg:w-1/2 md:w-4/5 w-11/12 mx-auto mt-8 px-8 py-4 bg-image-edit shadow-md rounded-md">
         <h2 class="text-center text-lg text-gray-700 font-bold pt-6 tracking-widest">Challenge Edit</h2>
 

@@ -22,11 +22,11 @@ Route::get('/', function () {
 });
 
 Route::resource('posts', PostController::class)
-    ->only(['create', 'store', 'edit', 'update', 'destroy']);
+    ->only(['show', 'create', 'store', 'edit', 'update', 'destroy']);
     // ->middleware('auth:users');
 
-Route::resource('posts', PostController::class)
-    ->only(['show', 'index']);
+Route::resource('charenges.posts', PostController::class)
+    ->only(['create', 'edit', 'update', 'destroy']);
 
 Route::resource('charenges', CharengeController::class)
     ->only(['create', 'store', 'edit', 'update', 'destroy']);
@@ -36,8 +36,9 @@ Route::resource('charenges', CharengeController::class)
 
 Route::resource('charenges.entries', EntryController::class)
     ->only(['store', 'destroy']);
+    // ->name('charenges.entries.destroy');
 
-Route::resource('charenges.comments', CommentController::class)
+Route::resource('posts.comments', CommentController::class)
     ->only(['create', 'store', 'edit', 'update', 'destroy']);
 // ->middleware('auth');
 

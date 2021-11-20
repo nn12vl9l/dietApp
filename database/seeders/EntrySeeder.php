@@ -14,11 +14,11 @@ class EntrySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('entries')->insert([
-            [
-                'user_id' => 1,
-                'charenge_id' => 1,
-            ]
-        ]);
+        // DB::table('entries')->insert([
+        //     [
+        //         'user_id' => 1,
+        //         'charenge_id' => 1,
+        //     ]
+        // ]);
     }
 }

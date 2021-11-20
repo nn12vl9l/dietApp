@@ -14,15 +14,15 @@ class CharengeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('charenges')->insert([
-            [
-                'user_id' => 1,
-                'title' => 'Youtubeで筋トレ',
-                'body' => '継続は力なり。3分でも5分でもやってみよう！',
-                'image' => '20211117215926_8.jpg',
-                'limit_data' => '2021/12/31',
-                'created_at' => '2021/11/17',
-            ],
-        ]);
+        // DB::table('charenges')->insert([
+        //     [
+        //         'user_id' => 1,
+        //         'title' => 'Youtubeで筋トレ',
+        //         'body' => '継続は力なり。3分でも5分でもやってみよう！',
+        //         'image' => '20211117215926_8.jpg',
+        //         'limit_data' => '2021/12/31',
+        //         'created_at' => '2021/11/17',
+        //     ],
+        // ]);
     }
 }
