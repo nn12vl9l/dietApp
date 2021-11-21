@@ -15,8 +15,7 @@ class Post extends Model
         'body',
         'charenge_id',
         'weight_kg',
-        'intake_kcal',
-        'consume_kcal',
+        'walk',
         'post_day',
         'image',
     ];
@@ -49,5 +48,10 @@ class Post extends Model
     public function charenge()
     {
         return $this->belongsTo(Charenge::class);
+    }
+
+    public function getWeightDiffAttribute()
+    {
+        return $this->weight_kg - $this->terget_weight;
     }
 }

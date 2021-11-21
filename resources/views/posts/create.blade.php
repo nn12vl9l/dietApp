@@ -30,7 +30,7 @@
                 </label>
                 <textarea name="body"
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-pink-600 w-full py-2 px-3"
-                    id="body" cols="30" rows="10" required
+                    id="body" cols="30" rows="5" required
                     placeholder="チャレンジ企画の感想、身体の変化や食事や運動について共有しよう！">{{ old('body') }}</textarea>
             </div>
             <div class="mb-4">
@@ -48,20 +48,12 @@
                     placeholder="60" value="{{ old('weight_kg') }}">
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm mb-2" for="intake_kcal">
-                    摂取カロリー(kcal)※任意
+                <label class="block text-gray-700 text-sm mb-2" for="walk">
+                    歩数 ※任意
                 </label>
-                <input type="number" name="intake_kcal"
+                <input type="number" name="walk"
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full py-2 px-3"
-                    placeholder="1800" value="{{ old('intake_kcal') }}">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm mb-2" for="consume_kcal">
-                    消費カロリー(kcal)※任意
-                </label>
-                <input type="number" name="consume_kcal"
-                    class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full py-2 px-3"
-                    placeholder="1200" value="{{ old('consume_kcal') }}">
+                    placeholder="2200" value="{{ old('walk') }}">
             </div>
             <div class="mb-8">
                 <label class="block text-gray-700 text-sm mb-2" for="post_day">

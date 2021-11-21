@@ -14,17 +14,16 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('posts')->insert([
-        //     [
-        //         // 'user_id' => 1,
-        //         // 'charenge_id' => 1,
-        //         // 'image' => '20211118134521_7.jpg',
-        //         // 'body' => 'スクワット10回×5セット、足上げ腹筋20回×3セット',
-        //         // 'weight_kg' => 55,
-        //         // 'intake_kcal' => 1400,
-        //         // 'consume_kcal' => 1300,
-        //         // 'post_day' => '2021/11/19',
-        //     ],
-        // ]);
+        DB::table('posts')->insert([
+            [
+                'user_id' => 1,
+                'charenge_id' => 1,
+                'image' => '20211118134521_7.jpg',
+                'body' => '頑張りました',
+                'weight_kg' => 55.6,
+                'walk' => 3800,
+                'post_day' => '2021/11/22',
+            ],
+        ]);
     }
 }

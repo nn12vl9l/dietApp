@@ -61,10 +61,13 @@
                     <a href="{{ route('posts.show', $post) }}">
                         <div class="flex">
                             <img src="{{ $post->user->profile_photo_url }}" class="rounded-full mr-4 mt-2 mb-2">
+                            {{-- {{ dd($post) }} --}}
                             <div>
                                 <p class="text-xl">{{ $post->user->name }}</p>
-                                <p class="text-sm">体重:{{ $post->user->weight }}kg</p>
+                                <p class="text-sm">体重:{{ $post->weight_kg }}kg</p>
                                 <p class="text-sm">目標体重:{{ $post->user->terget_weight }}kg</p>
+                                <p class="text-sm">あと、<span class="text-purple-400 font-bold">{{ $post->weight_diff }}</span>kg</p>
+                                <p class="text-sm">歩数:{{ $post->walk }}</p>
                             </div>
                         </div>
                         <p>{{ $post->post_day }}</p>
@@ -80,7 +83,7 @@
                             <input type="submit"
                                 class="bg-pink-400 hover:bg-pink-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-20 mr-2"
                                 value="解除">
-                            <p class="text-gray-700 font-bold">いいね数:{{ $post->likes->count() }}</p>
+                            <p class="text-gray-700 font-normal mr-3">いいね数:{{ $post->likes->count() }}</p>
                         </form>
                     @else
                         <form action="{{ route('posts.likes.store', $post) }}" method="POST" class="mt-2">
@@ -88,7 +91,7 @@
                             <input type="submit"
                                 class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-20 mr-2"
                                 value="いいね">
-                            <p class="text-gray-700 font-bold mr-3">いいね数:{{ $post->likes->count() }}</p>
+                            <p class="text-gray-700 font-normal mr-3">いいね数:{{ $post->likes->count() }}</p>
                         </form>
                     @endif
                 </div>

@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory(5)->create();
         $this->call(CharengeSeeder::class);
-        $this->call(EntrySeeder::class);
         $this->call(PostSeeder::class);
     }
 }

@@ -23,10 +23,28 @@ class PostRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        // return [
+        //     'body' => 'required|string|max:2000',
+        //     'charenge_id' => 'required|exists:charenges,id',
+        //     'image' => 'required|file|image|mimes:jpeg,png',
+        //     'post_day' => 'required|after:yesterday',
+        // ];
+
+        $route = $this->route()->getName();
+
+        $rule = [
             'body' => 'required|string|max:2000',
             'charenge_id' => 'required|exists:charenges,id',
             'post_day' => 'required|after:yesterday',
         ];
+
+        if (
+            $route === 'posts.store' ||
+            ($route === 'posts.update' && $this->file('image'))
+        ) {
+            $rule['image'] = 'required|file|image|mimes:jpeg,png';
+        }
+
+        return $rule;
     }
 }

@@ -16,7 +16,7 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->text('body');
-            $table->text('image')->nullable();
+            $table->text('image');
             $table->foreignId('user_id')
                 ->constrained()
                 ->cascadeOnUpdate()
@@ -25,9 +25,8 @@ class CreatePostsTable extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->integer('weight_kg')->nullable();
-            $table->integer('intake_kcal')->nullable();
-            $table->integer('consume_kcal')->nullable();
+            $table->float('weight_kg')->nullable();
+            $table->integer('walk')->nullable();
             $table->date('post_day');
             $table->timestamps();
         });

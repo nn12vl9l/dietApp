@@ -34,7 +34,7 @@
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full py-2 px-3"
                     placeholder="60" value="{{ old('weight_kg', $post->weight_kg) }}">
             </div>
-            <div class="mb-4">
+            {{-- <div class="mb-4">
                 <label class="block text-gray-700 text-sm mb-2" for="intake_kcal">
                     摂取カロリー(kcal)※任意
                 </label>
@@ -49,7 +49,7 @@
                 <input type="number" name="consume_kcal"
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full py-2 px-3"
                     placeholder="1200" value="{{ old('consume_kcal', $post->consume_kcal) }}">
-            </div>
+            </div> --}}
             <div class="mb-8">
                 <label class="block text-gray-700 text-sm mb-2" for="post_day">
                     投稿日

@@ -28,10 +28,10 @@ class CommentRequest extends FormRequest
         ];
     }
 
-    public function attributes()
-    {
-        return [
-            'comment' => 'コメント'
-        ];
-    }
+    // public function attributes()
+    // {
+    //     return [
+    //         'comment' => 'コメント'
+    //     ];
+    // }
 }

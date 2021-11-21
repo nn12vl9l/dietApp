@@ -1,19 +1,22 @@
 <x-app-layout>
     <div class="container lg:w-1/2 md:w-4/5 w-11/12 mx-auto mt-8 px-8 py-4 bg-white shadow-md rounded-md">
         <x-flash-message :message="session('notice')" />
-
+        
         <article class="mb-2">
             <div class="flex">
                 <img src="{{ $post->user->profile_photo_url }}" class="rounded-full mr-4 mt-2 mb-2">
                 <div class="mt-6 mb-3 float-left">
                     <p class="text-xl">{{ $post->user->name }}</p>
-                    <p class="text-sm">体重:{{ $post->user->weight }}kg</p>
-                    <p class="text-sm">目標体重:{{ $post->user->terget_weight }}kg</p>
+                    <p class="text-sm">体重:{{ $post->weight_kg }}kg</p>
+                    <p class="text-sm">身長:{{ $post->user->height }}cm</p>
+                    {{-- <p class="text-sm">あと、<span class="text-purple-400 font-bold">{{ ($post->weight_diff) }}</span>kg</p> --}}
                     <p class="text-sm">生年月日:{{ $post->user->birth_year }}</p>
                 </div>
             </div>
             <img src="{{ $post->image_url }}" class="container mx-auto mb-4 md:w-1/2 sm:auto">
             <p class="text-center mb-6">{{ $post->body }}</p>
+            <div class="text-sm mb-2 md:text-base font-normal text-gray-600 text-right">
+                いいね数:{{ $post->likes->count() }}</div>
             <hr class="my-4">
         </article>
 

@@ -20,9 +20,9 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->date('birth_year')->nullable();
-            $table->integer('weight')->nullable();
-            $table->integer('height')->nullable();
-            $table->integer('terget_weight')->nullable();
+            $table->float('weight')->nullable();
+            $table->float('height')->nullable();
+            $table->float('terget_weight')->nullable();
             $table->text('profile')->nullable();
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
