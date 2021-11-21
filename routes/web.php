@@ -34,14 +34,14 @@ Route::resource('charenges', CharengeController::class)
     ->middleware('auth');
 
 Route::resource('charenges.entries', EntryController::class)
-    ->only(['store', 'destroy']);
+    ->only(['show', 'store', 'destroy']);
 
 Route::resource('posts.comments', CommentController::class)
     ->only(['create', 'store', 'edit', 'update', 'destroy'])
     ->middleware('auth');
 
 Route::resource('posts.likes', LikeController::class)
-    ->only(['store', 'destroy']);
+    ->only(['show', 'store', 'destroy']);
     // ->middleware('auth');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

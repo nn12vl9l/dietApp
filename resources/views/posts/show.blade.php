@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="container lg:w-1/2 md:w-4/5 w-11/12 mx-auto mt-8 px-8 py-4 bg-white shadow-md rounded-md">
         <x-flash-message :message="session('notice')" />
-        
+
         <article class="mb-2">
             <div class="flex">
                 <img src="{{ $post->user->profile_photo_url }}" class="rounded-full mr-4 mt-2 mb-2">

@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\CharengeController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\CommentController;
+use App\Http\Controllers\Api\EntryController;
+use App\Http\Controllers\Api\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +39,18 @@ Route::group(['middleware' => ['api']], function () {
 Route::group(['middleware' => ['api']], function () {
     Route::apiResource('posts.comments', App\Http\Controllers\Api\CommentController::class);
 });
+
+// entry
+Route::group(['middleware' => ['api']], function () {
+    Route::apiResource('charenges.entries', App\Http\Controllers\Api\EntryController::class);
+});
+
+// like
+Route::group(['middleware' => ['api']], function () {
+    Route::apiResource('posts.likes', App\Http\Controllers\Api\LikeController::class);
+});
+
+
 
 // ユーザー登録
 Route::post('/register', [RegisterController::class, 'register']);

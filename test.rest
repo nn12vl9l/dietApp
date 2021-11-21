@@ -138,3 +138,45 @@ content-type: application/json
 DELETE /api/posts/29/comments/11
 Host: localhost
 Accept: application/json
+
+### entry-show/
+GET /api/charenges/2/entries/2
+Host: localhost
+Accept: application/json
+
+### entry-store/
+GET /api/charenges/2/entries/2
+Host: localhost
+Accept: application/json
+content-type: application/json
+
+{
+    "user_id": 5,
+    "charenge_id": 2
+}
+
+### entry-destroy/
+DELETE /api/charenges/1/entries/1
+Host: localhost
+Accept: application/json
+
+### likes-show/
+GET /api/posts/3/likes/3
+Host: localhost
+Accept: application/json
+
+### like-store/
+GET /api/posts/3/likes/3
+Host: localhost
+Accept: application/json
+content-type: application/json
+
+{
+    "user_id": 5,
+    "post_id": 2
+}
+
+### like-destroy/
+DELETE /api/posts/2/likes/2
+Host: localhost
+Accept: application/json
