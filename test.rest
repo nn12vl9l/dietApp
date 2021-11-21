@@ -1,0 +1,140 @@
+### register
+POST /api/register
+Host: localhost
+Accept: application/json
+content-type: application/json
+
+{
+    "name": "bbb",
+    "email": "b@b",
+    "password": "password"
+}
+
+### login
+POST /api/login
+Host: localhost
+Accept: application/json
+content-type: application/json
+
+{
+    "email": "b@b",
+    "password": "password"
+}
+
+### getUser
+GET /api/user
+Host: localhost
+Accept: application/json
+content-type: application/json
+Authorization: Bearer 2|CCcGgcfousjstxzQfgb9wHqjBp8gCaXgibx7mdrM
+
+
+###charenges-index/store/
+GET /api/charenges HTTP/1.1
+Host: localhost
+Accept: application/json
+content-type: application/json
+
+{
+    "title": "bbb",
+    "body": "ccc",
+    "image": "20211119171212_2.jpg",
+    "user_id": 9,
+    "limit_data": "2021/11/20"
+}
+
+### charenges-show/
+GET /api/charenges/1 HTTP/1.1
+Host: localhost
+Accept: application/json
+
+### charenges-update/
+PUT /api/charenges/1
+Host: localhost
+Accept: application/json
+content-type: application/json
+
+{
+    "title": "みんなでダイエット",
+    "body": "みんなで頑張りましょう",
+    "image": "20211119171212_2.jpg",
+    "user_id": 1,
+    "limit_data": "2021/11/20"
+}
+
+### charenges-destroy/
+DELETE /api/charenges/3 HTTP/1.1
+Host: localhost
+Accept: application/json
+
+###posts-store/
+GET /api/posts HTTP/1.1
+Host: localhost
+Accept: application/json
+content-type: application/json
+
+{
+    "body": "頑張っていきましょう",
+    "image": "20211119171212_2.jpg",
+    "user_id": 9,
+    "charenge_id": 1,
+    "post_day": "2021/11/20"
+}
+
+### posts-show/
+GET /api/posts/20 HTTP/1.1
+Host: localhost
+Accept: application/json
+
+### posts-update/
+PUT /api/posts/20
+Host: localhost
+Accept: application/json
+content-type: application/json
+
+{
+    "body": "みんなで頑張りましょう",
+    "image": "20211119171212_2.jpg",
+    "user_id": 1,
+    "charenge_id": 1,
+    "post_day": "2021/11/22"
+}
+
+### posts-destroy/
+DELETE /api/posts/21 HTTP/1.1
+Host: localhost
+Accept: application/json
+
+### comments-store/
+GET /api/posts/1/comments/12 HTTP/1.1
+Host: localhost
+Accept: application/json
+content-type: application/json
+
+{
+    "user_id": 7,
+    "post_id": 1,
+    "comment": "頑張りましょう"
+}
+
+### comments-show/
+GET /api/posts/29/comments/11
+Host: localhost
+Accept: application/json
+
+### comments-update/
+PUT /api/posts/29/comments/11
+Host: localhost
+Accept: application/json
+content-type: application/json
+
+{
+    "user_id": 7,
+    "post_id": 29,
+    "comment": "参考にします"
+}
+
+### comments-destroy/
+DELETE /api/posts/29/comments/11
+Host: localhost
+Accept: application/json

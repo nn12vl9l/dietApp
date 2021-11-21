@@ -8,6 +8,8 @@ use App\Models\Entry;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Post;
+use App\Models\Like;
+use Illuminate\Support\Facades\Auth;
 
 class CharengeController extends Controller
 {
@@ -18,7 +20,11 @@ class CharengeController extends Controller
      */
     public function index()
     {
-        $charenges = Charenge::all();
+        $today = date("Y-m-d");
+        $query = Charenge::query();
+        $query -> where('limit_data', '>=',$today);
+
+        $charenges = $query->get();
         return view('charenges.index', compact('charenges'));
     }
 
@@ -79,12 +85,15 @@ class CharengeController extends Controller
      */
     public function show(Charenge $charenge)
     {
-        $posts = Post::all();
+        $posts = Post::where('charenge_id', $charenge->id)->get();
+        // $like = "";
+        $user_id = Auth::id();
+        $likes = Like::all();
+        // $like = Like::with('post')->where('post_id', $post->id)->where('user_id', auth()->user()->id)->first();
         // $entry = Entry::where('user_id', auth()->user()->id)->where('charenge_id', $charenge->id)->get()->first();
         $entry = $charenge->entries()->where('user_id', auth()->user()->id)->get()->first();
-        // dd(empty($entry));
-
-        return view('charenges.show', compact('charenge','posts','entry'));
+        
+        return view('charenges.show', compact('charenge','posts','entry', 'likes'));
     }
 
     /**
@@ -107,11 +116,6 @@ class CharengeController extends Controller
      */
     public function update(CharengeRequest $request, Charenge $charenge)
     {
-        // if ($request->user()->cannot('update', $charenge)) {
-        //     return redirect()->route('charenges.show', $charenge)
-        //         ->withErrors('自分の投稿以外は更新できません');
-        // }
-
         $file = $request->file('image');
         if ($file) {
             $delete_file_path = $charenge->image_path;

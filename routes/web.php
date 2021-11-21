@@ -5,6 +5,7 @@ use App\Http\Controllers\CharengeController;
 use App\Http\Controllers\EntryController;
 use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,25 +23,26 @@ Route::get('/', function () {
 });
 
 Route::resource('posts', PostController::class)
-    ->only(['show', 'create', 'store', 'edit', 'update', 'destroy']);
-    // ->middleware('auth:users');
-
-Route::resource('charenges.posts', PostController::class)
-    ->only(['create', 'edit', 'update', 'destroy']);
+    ->only(['show', 'create', 'store', 'edit', 'update', 'destroy'])
+    ->middleware('auth');
 
 Route::resource('charenges', CharengeController::class)
     ->only(['create', 'store', 'edit', 'update', 'destroy']);
 
-Route::resource('charenges', CharengeController::class)
-    ->only(['show', 'index']);
+    Route::resource('charenges', CharengeController::class)
+    ->only(['show', 'index'])
+    ->middleware('auth');
 
 Route::resource('charenges.entries', EntryController::class)
     ->only(['store', 'destroy']);
-    // ->name('charenges.entries.destroy');
 
 Route::resource('posts.comments', CommentController::class)
-    ->only(['create', 'store', 'edit', 'update', 'destroy']);
-// ->middleware('auth');
+    ->only(['create', 'store', 'edit', 'update', 'destroy'])
+    ->middleware('auth');
+
+Route::resource('posts.likes', LikeController::class)
+    ->only(['store', 'destroy']);
+    // ->middleware('auth');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

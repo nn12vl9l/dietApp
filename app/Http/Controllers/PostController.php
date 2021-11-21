@@ -9,6 +9,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Like;
 
 use function PHPUnit\Framework\returnSelf;
 
@@ -31,9 +32,13 @@ class PostController extends Controller
      */
     public function create()
     {
-        $charenges = Charenge::all();
-        $entries = Entry::all();
-        return view('posts.create', compact('charenges','entries'));
+        $entry_query = Entry::query();
+        $entry_query->whereHas('charenge', function ($query) {
+            return $query->where('limit_data', '>=', date("Y-m-d"));
+        });
+        $entries = $entry_query->get();
+
+        return view('posts.create', compact('entries'));
     }
 
     /**
@@ -59,7 +64,6 @@ class PostController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            // dd($e);
             return back()->withInput()->withErrors('エラーにより公開できませんでした。');
         }
 
@@ -78,7 +82,9 @@ class PostController extends Controller
     {
         $charenges = Charenge::all();
         $comments = Comment::all();
-        return view('posts.show', compact('charenges', 'post', 'charenge', 'comment', 'comments'));
+        $like = Like::with('post')->where('post_id', $post->id)->where('user_id', auth()->user()->id)->first();
+
+        return view('posts.show', compact('charenges', 'post', 'charenge', 'comment', 'comments', 'like'));
     }
 
     /**

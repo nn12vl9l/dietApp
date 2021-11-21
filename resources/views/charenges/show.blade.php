@@ -57,7 +57,6 @@
         </div>
         <div>
             @foreach ($posts as $post)
-                @if ($post->charenge_id == $charenge->id)
                     <hr class="my-4">
                     <a href="{{ route('posts.show', $post) }}">
                         <div class="flex">
@@ -72,26 +71,26 @@
                         <img src="{{ $post->image_url }}" class="container mx-auto mb-4 md:w-1/2 sm:auto">
                         <p class="text-center mb-6">{{ $post->body }}</p>
                     </a>
-                @endif
-                <div>
-                    {{-- @if ($like)
-                    <form action="{{ route('posts.likes.destroy', [$post, $like]) }}" method="POST" class="mt-2">
-                        @csrf
-                        @method('DELETE')
-                        <input type="submit"
-                            class="bg-pink-400 hover:bg-pink-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-40 mr-2"
-                            value="お気に入り削除">
-                        <p class="text-gray-700 font-bold">お気に入り数:{{ $post->likes->count() }}</p>
-                    </form>
-                @else
-                    <form action="{{ route('posts.likes.store', $post) }}" method="POST" class="mt-2">
-                        @csrf
-                        <input type="submit"
-                            class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-40 mr-2"
-                            value="お気に入り">
-                        <p class="text-gray-700 font-bold">お気に入り数:{{ $post->likes->count() }}</p>
-                    </form>
-                @endif --}}
+
+                <div class="text-sm mb-2 md:text-base font-normal text-gray-600 text-right">
+                    @if ($like = $likes->where('post_id', $post->id)->where('user_id', auth()->user()->id)->first())
+                        <form action="{{ route('posts.likes.destroy', [$post, $like]) }}" method="POST" class="mt-2">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit"
+                                class="bg-pink-400 hover:bg-pink-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-20 mr-2"
+                                value="解除">
+                            <p class="text-gray-700 font-bold">いいね数:{{ $post->likes->count() }}</p>
+                        </form>
+                    @else
+                        <form action="{{ route('posts.likes.store', $post) }}" method="POST" class="mt-2">
+                            @csrf
+                            <input type="submit"
+                                class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-20 mr-2"
+                                value="いいね">
+                            <p class="text-gray-700 font-bold mr-3">いいね数:{{ $post->likes->count() }}</p>
+                        </form>
+                    @endif
                 </div>
             @endforeach
         </div>

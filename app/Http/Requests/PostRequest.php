@@ -24,9 +24,9 @@ class PostRequest extends FormRequest
     public function rules()
     {
         return [
-            'body' => 'required|text|max:2000',
-            'entry_id' => 'required|exists:entries,id',
-            'created_at' => 'required|after:yesterday',
+            'body' => 'required|string|max:2000',
+            'charenge_id' => 'required|exists:charenges,id',
+            'post_day' => 'required|after:yesterday',
         ];
     }
 }

@@ -50,7 +50,7 @@ class Charenge extends Model
 
     public function getLimitDataDiffAttribute()
     {
-        return Carbon::parse($this->limit_data)->diffInDays($this->created_at);
+        return Carbon::parse($this->limit_data)->diffInDays(today());
     }
 
     public function posts()

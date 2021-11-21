@@ -16,6 +16,9 @@
                                 class="text-purple-400 font-bold">{{ date('Y-m-d H:i:s', strtotime('-1 day')) < $charenge->created_at ? 'NEW' : '' }}</span>
                             {{ $charenge->date_diff }} に投稿
                         </p>
+                        <p class="text-sm mb-6 md:text-base font-normal text-gray-600">
+                            <span class="text-red-400 font-bold">残り期間 :{{ $charenge->limit_data_diff }} 日</span>
+                        </p>
                         <img class="container mx-auto mb-4 md:w-4/5 sm:auto" src="{{ $charenge->image_url }}" alt="">
                         <p class="text-gray-700 text-base">{{ $charenge->body }}</p>
                         <hr class="my-4">
