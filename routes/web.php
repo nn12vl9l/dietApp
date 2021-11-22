@@ -42,7 +42,8 @@ Route::resource('posts.comments', CommentController::class)
 
 Route::resource('posts.likes', LikeController::class)
     ->only(['show', 'store', 'destroy']);
-    // ->middleware('auth');
+// ->middleware('auth');
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

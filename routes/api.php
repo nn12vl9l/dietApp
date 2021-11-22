@@ -10,6 +10,8 @@ use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\EntryController;
 use App\Http\Controllers\Api\LikeController;
 
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes

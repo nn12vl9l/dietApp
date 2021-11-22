@@ -60,8 +60,7 @@
                     <hr class="my-4">
                     <a href="{{ route('posts.show', $post) }}">
                         <div class="flex">
-                            <img src="{{ $post->user->profile_photo_url }}" class="rounded-full mr-4 mt-2 mb-2">
-                            {{-- {{ dd($post) }} --}}
+                            <img src="{{ $post->user->profile_photo_url }}" class="rounded-full mr-4 mt-2 mb-2 w-16 h-16">
                             <div>
                                 <p class="text-xl">{{ $post->user->name }}</p>
                                 <p class="text-sm">体重:{{ $post->weight_kg }}kg</p>

@@ -50,8 +50,6 @@ class CharengeController extends Controller
         $charenge->user_id = $request->user()->id;
         $charenge->save();
 
-        // dd($charenge->id);
-
         $entry = new Entry();
         $entry->user_id = $charenge->user_id;
         $entry->charenge_id = $charenge->id;
@@ -86,13 +84,12 @@ class CharengeController extends Controller
     public function show(Charenge $charenge)
     {
         $posts = Post::where('charenge_id', $charenge->id)->get();
-        // $like = "";
+        
         $user_id = Auth::id();
         $likes = Like::all();
-        // $like = Like::with('post')->where('post_id', $post->id)->where('user_id', auth()->user()->id)->first();
-        // $entry = Entry::where('user_id', auth()->user()->id)->where('charenge_id', $charenge->id)->get()->first();
+
         $entry = $charenge->entries()->where('user_id', auth()->user()->id)->get()->first();
-        
+
         return view('charenges.show', compact('charenge','posts','entry', 'likes'));
     }
 

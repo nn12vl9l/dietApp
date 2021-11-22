@@ -16,7 +16,7 @@
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full py-2 px-3">{{ old('comment', $comment->comment) }}</textarea>
             </div>
             <input type="submit" value="更新"
-                class="w-full bg-blue-300 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">
+                class="w-full bg-gradient-to-r from-green-300 to-green-400 hover:bg-gradient-to-l hover:from-green-600 hover:to-green-600 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">
         </form>
     </div>
 </x-app-layout>
