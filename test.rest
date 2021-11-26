@@ -26,8 +26,7 @@ GET /api/user
 Host: localhost
 Accept: application/json
 content-type: application/json
-Authorization: Bearer 2|CCcGgcfousjstxzQfgb9wHqjBp8gCaXgibx7mdrM
-
+Authorization: Bearer 1|Sf3NIZOGPnjFHvbKEZI9v1imZHQ8FNGmopeFDXxh
 
 ###charenges-index/store/
 GET /api/charenges HTTP/1.1

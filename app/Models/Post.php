@@ -52,6 +52,6 @@ class Post extends Model
 
     public function getWeightDiffAttribute()
     {
-        return $this->weight_kg - $this->terget_weight;
+        return $this->weight_kg - $this->user->terget_weight;
     }
 }
