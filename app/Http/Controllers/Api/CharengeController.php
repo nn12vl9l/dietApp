@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Charenge;
 use App\Http\Requests\CharengeRequest;
-
+use Illuminate\Support\Facades\Storage;
 
 class CharengeController extends Controller
 {
@@ -33,6 +33,7 @@ class CharengeController extends Controller
     public function show($id)
     {
         $charenge = Charenge::find($id);
+        $charenge->image_url = $charenge->image_url;
         return $charenge;
     }
 

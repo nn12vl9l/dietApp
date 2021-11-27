@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Entry;
 use App\Models\Charenge;
+use App\Models\Like;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 class EntryController extends Controller
 {
@@ -16,9 +18,12 @@ class EntryController extends Controller
         $entry->user_id = $request->user()->id;
         $entry->charenge_id = $charenge->id;
         $entry->save();
+        $user_id = Auth::id();
+        $likes = Like::all();
 
-        return view('charenges.show', compact('entry', 'charenge', 'posts'));
+        $entry = $charenge->entries()->where('user_id', auth()->user()->id)->get()->first();
 
+        return view('charenges.show', compact('charenge', 'posts', 'entry', 'likes'));
     }
 
     public function destroy(Charenge $charenge, Entry $entry)

@@ -20,6 +20,10 @@ class Post extends Model
         'image',
     ];
 
+    public $appends = [
+        'image_url'
+    ];
+
     public function getImagePathAttribute()
     {
         return 'images/posts/' . $this->image;

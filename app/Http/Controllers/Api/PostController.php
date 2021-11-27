@@ -33,6 +33,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
+        $post->image_url = $post->image_url;
         return $post;
     }
 
