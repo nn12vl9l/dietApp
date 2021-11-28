@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Like;
+use Intervention\Image\Facades\Image;
 
 use function PHPUnit\Framework\returnSelf;
 
@@ -51,9 +52,23 @@ class PostController extends Controller
     {
         $post = new Post($request->all());
         $post->user_id = $request->user()->id;
+        $post->save();
 
         $file = $request->file('image');
         $post->image = date('YmdHis') . '_' . $file->getClientOriginalName();
+
+        $image = Image::make($file);
+        $image->orientate();
+        $image->resize(
+            600,
+            null,
+            function ($constraint) {
+                // 縦横比を保持したままにする
+                $constraint->aspectRatio();
+                // 小さい画像は大きくしない
+                $constraint->upsize();
+            }
+        );
 
         DB::beginTransaction();
         try {
@@ -113,6 +128,19 @@ class PostController extends Controller
             $post->image = date('YmdHis') . '_' . $file->getClientOriginalName();
         }
         $post->fill($request->all());
+
+        $image = Image::make($file);
+        $image->orientate();
+        $image->resize(
+            600,
+            null,
+            function ($constraint) {
+                // 縦横比を保持したままにする
+                $constraint->aspectRatio();
+                // 小さい画像は大きくしない
+                $constraint->upsize();
+            }
+        );
 
         DB::beginTransaction();
         try {

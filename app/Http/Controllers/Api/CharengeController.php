@@ -19,12 +19,10 @@ class CharengeController extends Controller
 
     public function store(CharengeRequest $request)
     {
-        // return $request;
         $charenge = new Charenge;
 
         $charenge->title = $request->title;
         $charenge->body = $request->body;
-        // $charenge->image = $request->image;
         $charenge->user_id = 1;
         $charenge->limit_data = $request->limit_data;
 
