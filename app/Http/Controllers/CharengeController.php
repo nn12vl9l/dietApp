@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Post;
 use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
+// use Image;
 
 class CharengeController extends Controller
 {
@@ -58,6 +60,19 @@ class CharengeController extends Controller
         $file = $request->file('image');
         $charenge->image = date('YmdHis') . '_' . $file->getClientOriginalName();
 
+        $image = Image::make($file);
+        $image->orientate();
+        $image->resize(
+            600,
+            null,
+            function ($constraint) {
+                // 縦横比を保持したままにする
+                $constraint->aspectRatio();
+                // 小さい画像は大きくしない
+                $constraint->upsize();
+            }
+        );
+        // dd($file, $image->save());
         DB::beginTransaction();
         try {
             $charenge->save();
@@ -67,6 +82,7 @@ class CharengeController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
+            dd($e);
             return back()->withInput()->withErrors('エラーにより公開できませんでした。');
         }
 
@@ -84,7 +100,7 @@ class CharengeController extends Controller
     public function show(Charenge $charenge)
     {
         $posts = Post::where('charenge_id', $charenge->id)->get();
-        
+
         $user_id = Auth::id();
         $likes = Like::all();
 

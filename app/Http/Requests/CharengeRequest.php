@@ -28,7 +28,7 @@ class CharengeRequest extends FormRequest
         $rule = [
             'title' => 'required|string|max:50',
             'body' => 'required|string|max:2000',
-            'limit_data' => 'required|date',
+            'limit_data' => 'required|string',
         ];
 
         if ($route === 'charenges.store' ||
