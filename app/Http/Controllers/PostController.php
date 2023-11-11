@@ -129,18 +129,18 @@ class PostController extends Controller
         }
         $post->fill($request->all());
 
-        $image = Image::make($file);
-        $image->orientate();
-        $image->resize(
-            600,
-            null,
-            function ($constraint) {
-                // 縦横比を保持したままにする
-                $constraint->aspectRatio();
-                // 小さい画像は大きくしない
-                $constraint->upsize();
-            }
-        );
+        // $image = Image::make($file);
+        // $image->orientate();
+        // $image->resize(
+        //     600,
+        //     null,
+        //     function ($constraint) {
+        //         // 縦横比を保持したままにする
+        //         $constraint->aspectRatio();
+        //         // 小さい画像は大きくしない
+        //         $constraint->upsize();
+        //     }
+        // );
 
         DB::beginTransaction();
         try {
